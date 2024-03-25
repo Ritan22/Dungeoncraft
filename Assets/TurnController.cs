@@ -21,12 +21,12 @@ public class TurnController : MonoBehaviour
         if (turn == false){
             comands.SetActive(false);
             Damage();
-            turn = true;
+            
         }
     }
 
     void Damage(){
-        Enemy.hp = Enemy.hp - 10;
+        Enemy.hp =- 10;
         Debug.Log(Enemy.hp);
     }
 

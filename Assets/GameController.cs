@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public int livelloDungeon;
     public static int selfHp;
     [Range(0,6)]public static int stack;
     [Header("Armi")]

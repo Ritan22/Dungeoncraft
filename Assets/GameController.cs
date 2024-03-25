@@ -40,15 +40,15 @@ public class GameController : MonoBehaviour
     }
 
     public void Sword(){
-        stack =- consumoSword;
+        stack -= consumoSword;
     }
     public void Axe(){
-        stack =- consumoAxe;
+        stack -= consumoAxe;
     }
     public void Bow(){
-        stack =- consumoBow;
+        stack -= consumoBow;
     }
     public void Knife(){
-        stack =- consumoKnife;
+        stack -= consumoKnife;
     }
 }

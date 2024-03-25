@@ -26,7 +26,7 @@ public class TurnController : MonoBehaviour
     }
 
     void Damage(){
-        Enemy.hp =- 10;
+        Enemy.hp -= 10;
         Debug.Log(Enemy.hp);
     }
 

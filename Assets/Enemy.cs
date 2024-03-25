@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         hp = 100;
+        dmg = 5;
     }
 
     // Update is called once per frame
@@ -24,15 +25,18 @@ public class Enemy : MonoBehaviour
 
     void Danno(){
         if (stack == 3){
-            GameController.selfHp =-(dmg*2);
+            GameController.selfHp -=(dmg*2);
+            //Debug.Log("Hp:"+GameController.selfHp);
             stack = 0;
             TurnController.turn = true;
 
         }else{
-            GameController.selfHp =- dmg;
+            GameController.selfHp -= dmg;
             stack += 1;
             TurnController.turn = true;
-            Debug.Log("danno");
+            Debug.Log("EnemyStack" + stack);
+            Debug.Log("Hp:" + GameController.selfHp);
+            
         }
     }
 }

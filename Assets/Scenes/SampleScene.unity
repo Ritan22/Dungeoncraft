@@ -1163,6 +1163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec70f1087c6f5c74c966e0443d72cea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dmg: 0
+  stack: 0
 --- !u!1 &1017295640
 GameObject:
   m_ObjectHideFlags: 0
@@ -1933,50 +1935,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416722780}
   m_CullTransparentMesh: 1
---- !u!1 &1433929663
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1433929664}
-  - component: {fileID: 1433929665}
-  m_Layer: 0
-  m_Name: DamageController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1433929664
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433929663}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2109568684}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1433929665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433929663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd46856944706f845b6fde7818402b3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1630309668
 GameObject:
   m_ObjectHideFlags: 0
@@ -2924,7 +2882,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 278601919}
-  - {fileID: 1433929664}
   - {fileID: 2141923010}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2957,10 +2914,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9331635617763144cbb59d9d2f5df438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consumoSword: 0
-  consumoAxe: 0
-  consumoBow: 0
-  consumoKnife: 0
+  livelloDungeon: 0
+  simpleAttack: 0
+  stackSword: 0
+  dmgSword: 0
+  stackAxe: 0
+  dmgAxe: 0
+  stackBow: 0
+  dmgBow: 0
+  stackKnife: 0
+  dmgKnife: 0
 --- !u!4 &2141923010
 Transform:
   m_ObjectHideFlags: 0

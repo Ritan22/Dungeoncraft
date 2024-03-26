@@ -20,14 +20,8 @@ public class TurnController : MonoBehaviour
         }
         if (turn == false){
             comands.SetActive(false);
-            Damage();
-            
+            GameController.Damage();
         }
-    }
-
-    void Damage(){
-        Enemy.hp -= 10;
-        Debug.Log(Enemy.hp);
     }
 
     public void AntiTurn(){

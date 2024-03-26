@@ -6,33 +6,40 @@ public class GameController : MonoBehaviour
 {
     public int livelloDungeon;
     public static int selfHp;
+    public int simpleAttack;
     [Range(0,6)]public static int stack;
     [Header("Armi")]
-    public int consumoSword;
-    public int consumoAxe;
-    public int consumoBow;
-    public int consumoKnife;
-
-    // Start is called before the first frame update
+    public int stackSword;
+    public int dmgSword;
+    [Space(5)]
+    public int stackAxe;
+    public int dmgAxe;
+    [Space(5)]
+    public int stackBow;
+    public int dmgBow;
+    [Space(5)]
+    public int stackKnife;
+    public int dmgKnife;
+//--------------------------------------------------------------------------------------------------------------------------------
     void Start()
     {
         selfHp = 100;
         stack = 0;
+        simpleAttack = 5;
 
         //consumo armi
-        
-        consumoSword = 3;
-        consumoAxe = 3;
-        consumoBow = 3;
-        consumoKnife = 3;
-    }
+        stackSword = 3;
+        stackAxe = 3;
+        stackBow = 3;
+        stackKnife = 3;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //danni armi
+        dmgSword = 8;
+        dmgAxe = 8;
+        dmgKnife = 8;
+        dmgSword = 8;
     }
-
+//--------------------------------------------------------------------------------------------------------------------------------
     public void addStack(){
         stack +=1;
         stack = Mathf.Clamp(stack, 0,6);
@@ -40,15 +47,24 @@ public class GameController : MonoBehaviour
     }
 
     public void Sword(){
-        stack -= consumoSword;
+        stack -= stackSword;
+        Enemy.hp -= dmgSword;
     }
     public void Axe(){
-        stack -= consumoAxe;
+        stack -= stackAxe;
+        Enemy.hp -= dmgAxe;
     }
     public void Bow(){
-        stack -= consumoBow;
+        stack -= stackBow;
+        Enemy.hp -= dmgBow;
     }
     public void Knife(){
-        stack -= consumoKnife;
+        stack -= stackKnife;
+        Enemy.hp -= dmgKnife;
+    }
+
+    public static void Damage(){
+        Enemy.hp -= 10;
+        Debug.Log(Enemy.hp);
     }
 }

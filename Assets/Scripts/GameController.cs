@@ -43,7 +43,7 @@ public class GameController : MonoBehaviour
     public void addStack(){
         stack +=1;
         stack = Mathf.Clamp(stack, 0,6);
-        Debug.Log(stack);
+        //Debug.Log(stack);
     }
 
     public void Sword(){

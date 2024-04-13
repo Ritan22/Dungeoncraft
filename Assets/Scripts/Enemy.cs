@@ -30,27 +30,27 @@ public class Enemy : MonoBehaviour
         if (hp <= (maxHp / 3))
         {
             ChangeState(3);
-        }else if (hp <= (maxHp / 3) * 2)
+            print("state3");
+        }else if (hp <= maxHp / 3 * 2)
         {
             ChangeState(2);
+            print("state2");
         }
-        print((maxHp / 3) * 2);
-        print((maxHp / 3));
+        print("2/3: "+maxHp / 3 * 2);
+        print("1/3: "+maxHp / 3);
+        print("Enemy HP: "+hp);
     }
 
     void Danno(){
         if (stack == 3){
-            GameController.selfHp -=(dmg*2);
+            GameController.selfHp -= dmg*2;
             //Debug.Log("Hp:"+GameController.selfHp);
             stack = 0;
             TurnController.turn = true;
-
         }else{
             GameController.selfHp -= dmg;
             stack += 1;
             TurnController.turn = true;
-            
-            
         }
     }
 

@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [Range(1, 3)] public int lvEnemy;
     public static int hp;
     private int maxHp;
-    public int dmg;
-    public int stack;
+    private int dmg;
+    private int stack;
 
+    [Header("States")]
     public SpriteRenderer enemyState;
     public Sprite state2;
     public Sprite state3;
+
+    [Header("Weaknesses")]
+    public Weaknsess Weaknsess1;
+    public Weaknsess Weaknsess2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,6 +71,15 @@ public class Enemy : MonoBehaviour
         {
             enemyState.sprite = state3;
         }
+    }
+
+    public enum Weaknsess
+    {
+        None, 
+        Bow,
+        Sword,
+        Knife,
+        Staff,
     }
 
 }

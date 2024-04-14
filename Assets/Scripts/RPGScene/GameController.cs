@@ -20,7 +20,10 @@ public class GameController : MonoBehaviour
     [Space(5)]
     public int stackKnife;
     public int dmgKnife;
-//--------------------------------------------------------------------------------------------------------------------------------
+    [Header("Canvas")]
+    public GameObject BattleInterface;
+    public GameObject DeathInterface;
+    //--------------------------------------------------------------------------------------------------------------------------------
     void Start()
     {
         selfHp = 100;
@@ -39,7 +42,16 @@ public class GameController : MonoBehaviour
         dmgKnife = 8;
         dmgSword = 8;
     }
-//--------------------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------
+    void Update()
+    {
+        if (selfHp <= 0)
+        {
+            BattleInterface.SetActive(false);
+            DeathInterface.SetActive(true);
+        }
+    }
+    //--------------------------------------------------------------------------------------------------------------------------------
     public void addStack(){
         stack +=1;
         stack = Mathf.Clamp(stack, 0,6);
@@ -47,20 +59,33 @@ public class GameController : MonoBehaviour
     }
 
     public void Sword(){
-        stack -= stackSword;
-        Enemy.hp -= dmgSword;
+        if (stack >= stackSword)
+        {
+            stack -= stackSword;
+            Enemy.hp -= dmgSword;
+        }
     }
     public void Axe(){
-        stack -= stackAxe;
-        Enemy.hp -= dmgAxe;
+        if (stack >= stackAxe)
+        {
+            stack -= stackAxe;
+            Enemy.hp -= dmgAxe;
+        }
+        
     }
     public void Bow(){
-        stack -= stackBow;
-        Enemy.hp -= dmgBow;
+        if (stack >= stackBow)
+        {
+            stack -= stackBow;
+            Enemy.hp -= dmgBow;
+        }
     }
     public void Knife(){
-        stack -= stackKnife;
-        Enemy.hp -= dmgKnife;
+        if (stack >= stackKnife)
+        {
+            stack -= stackKnife;
+            Enemy.hp -= dmgKnife;
+        }
     }
 
     public static void Damage(){

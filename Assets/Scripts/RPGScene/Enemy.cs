@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class Enemy : MonoBehaviour
 {
-    [Range(1, 3)] public int lvEnemy;
+    public int money;
+    //[Range(1, 3)] public int lvEnemy;
     public static int hp;
     private int maxHp;
     private int dmg;
@@ -16,16 +18,20 @@ public class Enemy : MonoBehaviour
     public Sprite state3;
 
     [Header("Weaknesses")]
-    public Weaknsess Weaknsess1;
-    public Weaknsess Weaknsess2;
+    private string[] weaknesses = {"none", "bow", "sword", "knife", "axe"};
+    public string weakness1;
+    public string weakness2;
 
     // Start is called before the first frame update
     void Start()
     {
-        hp = 100;
+        // ogni 5 livelli aumenta gli hp di 20
+        hp = 100 + (GameController.dungeonLevel/5 * 20);
         maxHp = hp;
         dmg = 5;
         enemyState = GetComponent<SpriteRenderer>();
+        weakness1 = weaknesses[Random.Range(1, weaknesses.Length)];
+        weakness2 = weaknesses[Random.Range(0, weaknesses.Length)];
     }
 
     // Update is called once per frame
@@ -37,25 +43,24 @@ public class Enemy : MonoBehaviour
         if (hp <= (maxHp / 3))
         {
             ChangeState(3);
-            print("state3");
         }else if (hp <= maxHp / 3 * 2)
         {
             ChangeState(2);
-            print("state2");
         }
-        print("2/3: "+maxHp / 3 * 2);
-        print("1/3: "+maxHp / 3);
-        print("Enemy HP: "+hp);
     }
 
     void Danno(){
         if (stack == 3){
-            GameController.selfHp -= dmg*2;
-            //Debug.Log("Hp:"+GameController.selfHp);
+            // /5 *5 --> essendo dungeonLevel un intero quando divido per 5 scarta i decimali. es--> 2/5 = 0 oppure 8/5 = 1
+            GameController.selfHp -= dmg*2 + (GameController.dungeonLevel/5 * 5);
+            print("Danno: " + dmg*2);
+            print("Danno bonus: " + GameController.dungeonLevel/5 * 5);
             stack = 0;
             TurnController.turn = true;
         }else{
-            GameController.selfHp -= dmg;
+            GameController.selfHp -= dmg + (GameController.dungeonLevel/5 * 5);
+            print("Danno: " + dmg);
+            print("Danno Bonus: " + GameController.dungeonLevel/5 * 5);
             stack += 1;
             TurnController.turn = true;
         }
@@ -73,7 +78,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public enum Weaknsess
+    public enum Weakness
     {
         None, 
         Bow,

@@ -15,6 +15,6 @@ public class LvText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lvText.text = "Lv: " + TurnController.NTurn;
+        lvText.text = "Lv: " + GameController.dungeonLevel;
     }
 }

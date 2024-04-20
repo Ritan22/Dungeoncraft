@@ -6,12 +6,10 @@ public class TurnController : MonoBehaviour
 {
     public static bool turn;
     public GameObject comands;
-    public static int NTurn;
     // Start is called before the first frame update
     void Start()
     {
         turn = true;
-        NTurn = 3;
     }
 
     // Update is called once per frame
@@ -22,13 +20,6 @@ public class TurnController : MonoBehaviour
         }
         if (turn == false){
             comands.SetActive(false);
-            GameController.Damage();
-        }
-
-        if (Enemy.hp <= 0)
-        {
-            NTurn += 1;
-            print(NTurn);
         }
     }
 

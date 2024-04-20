@@ -15,6 +15,6 @@ public class HpText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Hp.text = "HP:" + GameController.selfHp;
+        Hp.text = "" + GameController.selfHp;
     }
 }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LvText : MonoBehaviour
+public class PotionText : MonoBehaviour
 {
-    public Text lvText;
+    public Text lvPotion;
     void Update()
     {
-        lvText.text = "Lv: " + GameController.dungeonLevel;
+        lvPotion.text = "" + GameController.nPotion;
     }
 }

@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
 public class Enemy : MonoBehaviour
 {
-    public int money;
-    //[Range(1, 3)] public int lvEnemy;
+
+    public static int getMoney;
+    [SerializeField]private int money;
     public static int hp;
     private int maxHp;
     private int dmg;
@@ -32,13 +34,14 @@ public class Enemy : MonoBehaviour
         enemyState = GetComponent<SpriteRenderer>();
         weakness1 = weaknesses[Random.Range(1, weaknesses.Length)];
         weakness2 = weaknesses[Random.Range(0, weaknesses.Length)];
+        getMoney = money;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (!TurnController.turn){
-            Danno();
+            StartCoroutine(Danno());
         }
         if (hp <= (maxHp / 3))
         {
@@ -47,23 +50,22 @@ public class Enemy : MonoBehaviour
         {
             ChangeState(2);
         }
+
     }
 
-    void Danno(){
+    IEnumerator Danno(){
+        yield return new WaitForSeconds(2);
         if (stack == 3){
             // /5 *5 --> essendo dungeonLevel un intero quando divido per 5 scarta i decimali. es--> 2/5 = 0 oppure 8/5 = 1
             GameController.selfHp -= dmg*2 + (GameController.dungeonLevel/5 * 5);
-            print("Danno: " + dmg*2);
-            print("Danno bonus: " + GameController.dungeonLevel/5 * 5);
             stack = 0;
             TurnController.turn = true;
         }else{
             GameController.selfHp -= dmg + (GameController.dungeonLevel/5 * 5);
-            print("Danno: " + dmg);
-            print("Danno Bonus: " + GameController.dungeonLevel/5 * 5);
             stack += 1;
             TurnController.turn = true;
         }
+        StopAllCoroutines();
     }
 
     void ChangeState(int state)
@@ -76,15 +78,6 @@ public class Enemy : MonoBehaviour
         {
             enemyState.sprite = state3;
         }
-    }
-
-    public enum Weakness
-    {
-        None, 
-        Bow,
-        Sword,
-        Knife,
-        Staff,
     }
 
 }

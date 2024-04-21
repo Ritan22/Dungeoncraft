@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class Axe : MonoBehaviour
 {
+    private int stackBow;
+    private int dmgAxe;
+    public static int axeLevel;
     // Start is called before the first frame update
     void Start()
     {
-        
+        stackBow = 3 - (axeLevel % 3);
+        dmgAxe = 8 + (axeLevel / 3 * 4);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void DamageAxe(){
+        if (GameController.stack >= stackBow)
+        {
+            GameController.stack -= stackBow;
+            Enemy.hp -= dmgAxe;
+            TurnController.turn = false;
+        }
     }
 }

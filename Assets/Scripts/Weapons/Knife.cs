@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class Knife : MonoBehaviour
 {
+    private int stackKnife;
+    private int dmgKnife;
+    public static int knifeLevel;
     // Start is called before the first frame update
     void Start()
     {
-        
+        stackKnife = 3 - (knifeLevel % 3);
+        dmgKnife = 8 + (knifeLevel / 3 * 4);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void DamageKnife(){
+        if (GameController.stack >= stackKnife)
+        {
+            GameController.stack -= stackKnife;
+            Enemy.hp -= dmgKnife;
+            TurnController.turn = false;
+        }
     }
 }

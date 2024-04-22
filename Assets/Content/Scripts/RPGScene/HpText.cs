@@ -8,6 +8,6 @@ public class HpText : MonoBehaviour
     public Text Hp;
     void Update()
     {
-        Hp.text = "" + GameController.selfHp;
+        Hp.text = "" + GameController.playerHp;
     }
 }

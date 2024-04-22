@@ -18,7 +18,7 @@ public class Sword : MonoBehaviour
         if (GameController.stack >= stackSword)
         {
             GameController.stack -= stackSword;
-            Enemy.hp -= dmgSword;
+            Enemy.enemyHp -= dmgSword;
             TurnController.turn = false;
         }
     }

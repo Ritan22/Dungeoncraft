@@ -18,7 +18,7 @@ public class Knife : MonoBehaviour
         if (GameController.stack >= stackKnife)
         {
             GameController.stack -= stackKnife;
-            Enemy.hp -= dmgKnife;
+            Enemy.enemyHp -= dmgKnife;
             TurnController.turn = false;
         }
     }

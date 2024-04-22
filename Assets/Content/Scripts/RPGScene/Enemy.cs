@@ -6,10 +6,10 @@ using UnityEngine.SocialPlatforms;
 
 public class Enemy : MonoBehaviour
 {
-
+    private Animator enemyAnimator;
     public static int getMoney;
     [SerializeField]private int money;
-    public static int hp;
+    public static int enemyHp;
     private int maxHp;
     private int dmg;
     private int stack;
@@ -28,8 +28,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         // ogni 5 livelli aumenta gli hp di 20
-        hp = 100 + (GameController.dungeonLevel/5 * 20);
-        maxHp = hp;
+        enemyHp = 100 + (GameController.dungeonLevel/5 * 20);
+        maxHp = enemyHp;
         dmg = 5;
         enemyState = GetComponent<SpriteRenderer>();
         weakness1 = weaknesses[Random.Range(1, weaknesses.Length)];
@@ -41,31 +41,44 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if (!TurnController.turn){
-            StartCoroutine(Danno());
+            StartCoroutine(DamageToPlayer());
         }
-        if (hp <= (maxHp / 3))
+        if (enemyHp <= (maxHp / 3))
         {
             ChangeState(3);
-        }else if (hp <= maxHp / 3 * 2)
+        }else if (enemyHp <= maxHp / 3 * 2)
         {
             ChangeState(2);
         }
 
     }
 
-    IEnumerator Danno(){
+    IEnumerator DamageToPlayer(){
         yield return new WaitForSeconds(2);
         if (stack == 3){
             // /5 *5 --> essendo dungeonLevel un intero quando divido per 5 scarta i decimali. es--> 2/5 = 0 oppure 8/5 = 1
-            GameController.selfHp -= dmg*2 + (GameController.dungeonLevel/5 * 5);
+            GameController.playerHp -= dmg*2 + (GameController.dungeonLevel/5 * 5);
             stack = 0;
             TurnController.turn = true;
         }else{
-            GameController.selfHp -= dmg + (GameController.dungeonLevel/5 * 5);
+            GameController.playerHp -= dmg + (GameController.dungeonLevel/5 * 5);
             stack += 1;
             TurnController.turn = true;
         }
         StopAllCoroutines();
+    }
+
+    public void SelfDamage(){
+        enemyHp -=10;
+        if (enemyAnimator == null){
+            enemyAnimator = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Animator>();
+        }
+        enemyAnimator.SetTrigger("Damage");
+        if (Enemy.enemyHp <= 0) {
+            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+            TurnController.turn = true;
+            GameController.playerMoney += money;
+        }
     }
 
     void ChangeState(int state)

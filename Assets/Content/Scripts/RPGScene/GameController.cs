@@ -9,8 +9,7 @@ public class GameController : MonoBehaviour
     public static int nPotion;
     public static int playerMoney;
     public static int dungeonLevel;
-    public static int selfHp;
-    private int simpleAttack;
+    public static int playerHp;
     public static int stack;
     [Header("Armi")]
 
@@ -33,9 +32,8 @@ public class GameController : MonoBehaviour
     //--------------------------------------------------------------------------------------------------------------------------------
     void Start()
     {
-        selfHp = 1000;
+        playerHp = 1000;
         stack = 0;
-        simpleAttack = 5;
         dungeonLevel = 1;
 
         //consumo armi
@@ -54,7 +52,7 @@ public class GameController : MonoBehaviour
     //--------------------------------------------------------------------------------------------------------------------------------
     void Update()
     {
-        if (selfHp <= 0)
+        if (playerHp <= 0)
         {
             Death();
         }
@@ -74,7 +72,7 @@ public class GameController : MonoBehaviour
         if (stack >= stackAxe)
         {
             stack -= stackAxe;
-            Enemy.hp -= dmgAxe;
+            Enemy.enemyHp -= dmgAxe;
             TurnController.turn = false;
         }
         
@@ -83,7 +81,7 @@ public class GameController : MonoBehaviour
         if (stack >= stackBow)
         {
             stack -= stackBow;
-            Enemy.hp -= dmgBow;
+            Enemy.enemyHp -= dmgBow;
             TurnController.turn = false;
         }
     }
@@ -91,25 +89,16 @@ public class GameController : MonoBehaviour
         if (stack >= stackKnife)
         {
             stack -= stackKnife;
-            Enemy.hp -= dmgKnife;
+            Enemy.enemyHp -= dmgKnife;
             TurnController.turn = false;
         }
     }
 
-    public void Damage(){
-        Enemy.hp -= 10;
-        if (enemyAnimator == null){
-            enemyAnimator = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Animator>();
-        }
-        enemyAnimator.SetTrigger("Damage");
-        // Debug.Log("Danno al Nemico: " + Enemy.hp);
-        if (Enemy.hp <= 0) {
-            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
-            TurnController.turn = true;
+    public void DamageEnemy(){
+        
+        if (Enemy.enemyHp <= 0) {
             nextLevelCanvas.SetActive(true);
             background.SetActive(false);
-            playerMoney += Enemy.getMoney;
-            print("playerMoney: "+ playerMoney);
         }
         stack +=1;
         stack = Mathf.Clamp(stack, 0,6);

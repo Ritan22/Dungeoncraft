@@ -4,24 +4,14 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    private Animator enemyAnimator;
-    public static int recordDungeon;
-    public static int nPotion;
-    public static int playerMoney;
-    public static int dungeonLevel;
-    public static int playerHp;
-    public static int stack;
-    [Header("Armi")]
+    public static int playerDamage;
+    public static int recordDungeon; // è il massimo livello che ho raggiunto nel dungeon
+    public static int nPotion; // è il numero di pozioni che il giocatore ha a disposizione nella partita corrente 
+    public static int playerMoney; // sono i soldi che il giocatore posside
+    public static int dungeonLevel; // è il livello del Dungeon che aumenta ogni volta che sconfiggi un nemico
+    public static int playerHp; // sono gli hp del giocatore
+    public static int stack; // sono le stack del giocatore
 
-    [Space(5)]
-    public int stackAxe;
-    public int dmgAxe;
-    [Space(5)]
-    public int stackBow;
-    public int dmgBow;
-    [Space(5)]
-    public int stackKnife;
-    public int dmgKnife;
     [Header("Canvas")]
     [SerializeField] private GameObject battleInterface;
     [SerializeField] private GameObject deathInterface;
@@ -32,26 +22,17 @@ public class GameController : MonoBehaviour
     //--------------------------------------------------------------------------------------------------------------------------------
     void Start()
     {
-        playerHp = 1000;
-        stack = 0;
-        dungeonLevel = 1;
+        playerDamage = -10;
+        playerHp = 1000; 
+        stack = 0; // La partita inizia con 0 stack per le armi
+        dungeonLevel = 1; // Il dungeon inizia dal livello 1
 
-        //consumo armi
-        stackAxe = 3;
-        stackBow = 3;
-        stackKnife = 3;
-
-        //danni armi
-        // dmgSword = 8;
-        dmgAxe = 8;
-        dmgKnife = 8;
-        dmgBow = 8;
-
-        Instantiate(enemies[Random.Range(0, enemies.Length)]);
+        Instantiate(enemies[Random.Range(0, enemies.Length)]); // se si volessero aggiungere più nemici
     }
-    //--------------------------------------------------------------------------------------------------------------------------------
+
     void Update()
     {
+        // quando il player raggiunge 0 hp parte la funzione Death() 
         if (playerHp <= 0)
         {
             Death();
@@ -59,56 +40,34 @@ public class GameController : MonoBehaviour
     }
     //--------------------------------------------------------------------------------------------------------------------------------
 
+    // funzione che si avvia nel momento in qui il giocaotore finisce gli hp
     private void Death(){
-        battleInterface.SetActive(false);
-        deathInterface.SetActive(true);
-        nPotion = 0;
+        battleInterface.SetActive(false); // disattiva la Canva di battleInterface
+        deathInterface.SetActive(true); // attiva la Canva di deathInterface
+        nPotion = 0; // resetta il numero di pozioni siccome non sono un item accumolabile tra le partite
+
+        // permettere di verificare se il record del dungeon è superiore al livello raggiunto e in caso lo memorizza
         if (recordDungeon < dungeonLevel){
             recordDungeon = dungeonLevel;
-        }
-        print(recordDungeon);
-    }
-    public void Axe(){
-        if (stack >= stackAxe)
-        {
-            stack -= stackAxe;
-            Enemy.enemyHp -= dmgAxe;
-            TurnController.turn = false;
-        }
-        
-    }
-    public void Bow(){
-        if (stack >= stackBow)
-        {
-            stack -= stackBow;
-            Enemy.enemyHp -= dmgBow;
-            TurnController.turn = false;
-        }
-    }
-    public void Knife(){
-        if (stack >= stackKnife)
-        {
-            stack -= stackKnife;
-            Enemy.enemyHp -= dmgKnife;
-            TurnController.turn = false;
         }
     }
 
     public void DamageEnemy(){
-        
+        // controlla se il nemico ha perso tutti gli hp e attiva e disattiva le giuste Canva per passare al livello successivo
         if (Enemy.enemyHp <= 0) {
             nextLevelCanvas.SetActive(true);
             background.SetActive(false);
         }
-        stack +=1;
-        stack = Mathf.Clamp(stack, 0,6);
+        stack +=1; // aumenta le stack dopo aver sferrato un attacco semplice
+        stack = Mathf.Clamp(stack, 0,6); // impedisce al numero di stack di superare le 6 unità
+        TurnController.turn = false; // setta il turno a false in modo da passare al turno avversario
     }
 
     public void NextLevel() {
-        dungeonLevel++;
-        nextLevelCanvas.SetActive(false);
-        background.SetActive(true);
-        stack = 0;
-        Instantiate(enemies[Random.Range(0, enemies.Length)]);
+        dungeonLevel++; // aumento di una unità il livello del dungeon
+        nextLevelCanvas.SetActive(false); // disattiva la Canva per passare di livello
+        background.SetActive(true);// riattiva la Canva per la scelta delle azioni in partita
+        stack = 0; // imposta le stack a 0 siccome ogni battaglia è a se
+        Instantiate(enemies[Random.Range(0, enemies.Length)]); // riposiziona uno dei nemici presenti nella lista
     }
 }

@@ -102,8 +102,6 @@ MonoBehaviour:
   enemyState: {fileID: 0}
   state2: {fileID: 21300000, guid: 29534410e54f7b444b0b7d9fa9f74a95, type: 3}
   state3: {fileID: 21300000, guid: 03a4c2dcaabf35146a5a7e9f4854f713, type: 3}
-  weakness1: 
-  weakness2: 
 --- !u!95 &2487706342850029849
 Animator:
   serializedVersion: 5

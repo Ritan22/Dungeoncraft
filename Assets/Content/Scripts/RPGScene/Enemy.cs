@@ -19,10 +19,10 @@ public class Enemy : MonoBehaviour
     public Sprite state2;
     public Sprite state3;
 
-    [Header("Weaknesses")]
+    //Weakness
     private string[] weaknesses = {"none", "bow", "sword", "knife", "axe"};
-    public string weakness1;
-    public string weakness2;
+    private string weakness1;
+    private string weakness2;
 
     // Start is called before the first frame update
     void Start()
@@ -54,7 +54,11 @@ public class Enemy : MonoBehaviour
     }
 
     IEnumerator DamageToPlayer(){
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3.5f);
+        if (enemyAnimator == null){
+            enemyAnimator = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Animator>();
+        }
+        enemyAnimator.SetTrigger("Attack");
         if (stack == 3){
             // /5 *5 --> essendo dungeonLevel un intero quando divido per 5 scarta i decimali. es--> 2/5 = 0 oppure 8/5 = 1
             GameController.playerHp -= dmg*2 + (GameController.dungeonLevel/5 * 5);
@@ -65,11 +69,19 @@ public class Enemy : MonoBehaviour
             stack += 1;
             TurnController.turn = true;
         }
+        if (Background.backgroundAnimation == null){
+            Background.backgroundAnimation = GameObject.FindGameObjectWithTag("Background").GetComponent<Animator>();
+        }
+        Background.backgroundAnimation.SetTrigger("Move");
         StopAllCoroutines();
     }
 
     public void SelfDamage(){
-        enemyHp -=10;
+        enemyHp += GameController.playerDamage;
+        if (DamageText.damageAnimator == null){
+            DamageText.damageAnimator = GameObject.FindGameObjectWithTag("DamageText").GetComponent<Animator>();
+        }
+        DamageText.damageAnimator.SetTrigger("Move");
         if (enemyAnimator == null){
             enemyAnimator = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Animator>();
         }

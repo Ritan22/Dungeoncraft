@@ -314,6 +314,7 @@ GameObject:
   - component: {fileID: 7673871873394677627}
   - component: {fileID: 5051539651138517407}
   - component: {fileID: 8686014745734351553}
+  - component: {fileID: 8351529497050707228}
   m_Layer: 5
   m_Name: Bow
   m_TagString: Untagged
@@ -447,6 +448,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 8351529497050707228}
+        m_TargetAssemblyTypeName: Bow, Assembly-CSharp
+        m_MethodName: DamageBow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &8351529497050707228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136221672225276657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ab8eee20ce3c034aaed1ee32ee00315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1209538610750452872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1742,6 +1767,7 @@ GameObject:
   - component: {fileID: 5503477201896047110}
   - component: {fileID: 8810179831013433796}
   - component: {fileID: 885305165453518438}
+  - component: {fileID: 1711709421839815676}
   m_Layer: 5
   m_Name: ' Potion'
   m_TagString: Untagged
@@ -1851,7 +1877,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8810179831013433796}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1711709421839815676}
+        m_TargetAssemblyTypeName: AddPotion, Assembly-CSharp
+        m_MethodName: AddHP
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1711709421839815676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5967371310963722648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9dd3dde657fcd498f71fc8df2ad0ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6101080067248612958
 GameObject:
   m_ObjectHideFlags: 0
@@ -1932,7 +1982,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: -10
 --- !u!95 &2558472866451275199
 Animator:
   serializedVersion: 5
@@ -1979,6 +2029,7 @@ GameObject:
   - component: {fileID: 4355342291556712990}
   - component: {fileID: 6634061169894727862}
   - component: {fileID: 1102031237439814103}
+  - component: {fileID: 1478387391379788896}
   m_Layer: 5
   m_Name: Axe
   m_TagString: Untagged
@@ -2112,6 +2163,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1478387391379788896}
+        m_TargetAssemblyTypeName: Axe, Assembly-CSharp
+        m_MethodName: DamageAxe
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &1478387391379788896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6370757668813345287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28e37f35e084c8d4bbb4b49ef53bea85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6517660921420717459
 GameObject:
   m_ObjectHideFlags: 0
@@ -2388,6 +2463,7 @@ GameObject:
   - component: {fileID: 408853733426777676}
   - component: {fileID: 7521374144420139214}
   - component: {fileID: 6153969871864750768}
+  - component: {fileID: 2508358188490697362}
   m_Layer: 5
   m_Name: Sword
   m_TagString: Untagged
@@ -2521,6 +2597,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 2508358188490697362}
+        m_TargetAssemblyTypeName: Sword, Assembly-CSharp
+        m_MethodName: DamageSword
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &2508358188490697362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6983135222320368206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b9bc54834b44ef4f8b9d01fa3f2c690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7004369410265221933
 GameObject:
   m_ObjectHideFlags: 0
@@ -3166,6 +3266,7 @@ GameObject:
   - component: {fileID: 8722775552594181001}
   - component: {fileID: 4735830656930733288}
   - component: {fileID: 282412451755552103}
+  - component: {fileID: 4530188336540672441}
   m_Layer: 5
   m_Name: Knife
   m_TagString: Untagged
@@ -3299,3 +3400,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 4530188336540672441}
+        m_TargetAssemblyTypeName: Knife, Assembly-CSharp
+        m_MethodName: DamageKnife
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &4530188336540672441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9097429263629755269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f301434cca2f72444954117e205eca56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -7,7 +7,6 @@ using UnityEngine.SocialPlatforms;
 public class Enemy : MonoBehaviour
 {
     private Animator enemyAnimator;
-    public static int getMoney;
     [SerializeField]private int money;
     public static int enemyHp;
     private int maxHp;
@@ -21,8 +20,8 @@ public class Enemy : MonoBehaviour
 
     //Weakness
     private string[] weaknesses = {"none", "bow", "sword", "knife", "axe"};
-    private string weakness1;
-    private string weakness2;
+    public static string weakness1;
+    public static string weakness2;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +33,6 @@ public class Enemy : MonoBehaviour
         enemyState = GetComponent<SpriteRenderer>();
         weakness1 = weaknesses[Random.Range(1, weaknesses.Length)];
         weakness2 = weaknesses[Random.Range(0, weaknesses.Length)];
-        getMoney = money;
     }
 
     // Update is called once per frame
@@ -54,7 +52,7 @@ public class Enemy : MonoBehaviour
     }
 
     IEnumerator DamageToPlayer(){
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(2f);
         if (enemyAnimator == null){
             enemyAnimator = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Animator>();
         }
@@ -86,7 +84,7 @@ public class Enemy : MonoBehaviour
             enemyAnimator = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Animator>();
         }
         enemyAnimator.SetTrigger("Damage");
-        if (Enemy.enemyHp <= 0) {
+        if (enemyHp <= 0) {
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
             TurnController.turn = true;
             GameController.playerMoney += money;

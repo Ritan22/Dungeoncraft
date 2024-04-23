@@ -23,28 +23,41 @@ public class SaveData : MonoBehaviour {
     }
 
     public void AddSwordLevel() {
+        if (GameController.playerMoney >= toSave.costSword){
         Sword.swordLevel++;
         toSave.swordLevel = Sword.swordLevel; // Aggiorna swordLevel in toSave
-        
+        GameController.playerMoney -= toSave.costSword;
+        toSave.costAxe += 20;
         SaveDataToFile(); // Salva i dati in un file JSON
+        }
     }
     public void AddKnifeLevel() {
+        if (GameController.playerMoney >= toSave.costKnife){
         Knife.knifeLevel++;
         toSave.knifeLevel = Knife.knifeLevel; // Aggiorna knifeLevel in toSave
-
+        GameController.playerMoney -= toSave.costKnife;
+        toSave.costAxe += 20;
         SaveDataToFile(); // Salva i dati in un file JSON
+        }
     }
     public void AddBowLevel() {
+        if (GameController.playerMoney >= toSave.costBow){
         Bow.bowLevel++;
         toSave.bowLevel = Bow.bowLevel; // Aggiorna bowLevel in toSave
-        
+        GameController.playerMoney -= toSave.costBow;
+        toSave.costAxe += 20;
         SaveDataToFile(); // Salva i dati in un file JSON
+
+        }
     }
     public void AddAxeLevel() {
+        if (GameController.playerMoney >= toSave.costAxe){
         Axe.axeLevel++;
         toSave.axeLevel = Axe.axeLevel; // Aggiorna axeLevel in toSave
-        
+        GameController.playerMoney -= toSave.costAxe;
+        toSave.costAxe += 20;
         SaveDataToFile(); // Salva i dati in un file JSON
+        }
     }
     public void AddMoney(){
         toSave.money = GameController.playerMoney; 
@@ -68,8 +81,14 @@ public class SaveData : MonoBehaviour {
             Bow.bowLevel = toSave.bowLevel; // Carica bowLevel dal file
             Axe.axeLevel = toSave.axeLevel; // Carica axeLevel dal file
             //_________________________
+            GameController.playerMoney = toSave.money;
             GameController.nPotion = toSave.nPotion; // Carica nPotion dal file
             GameController.recordDungeon = toSave.record; // Carica recordDungeon dal file
+            Axe.cost = toSave.costAxe;
+            Sword.cost = toSave.costSword;
+            Bow.cost = toSave.costBow;
+            Knife.cost = toSave.costBow;
+
         } else {
             // Se il file non esiste, inizia con valori predefiniti
             Sword.swordLevel = 0;
@@ -90,5 +109,9 @@ public class Data {
     public int money;
     public int nPotion;
     public int record;
+    public int costSword;
+    public int costBow;
+    public int costAxe;
+    public int costKnife;
     // Altri dati che desideri salvare...
 }

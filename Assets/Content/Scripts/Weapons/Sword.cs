@@ -5,21 +5,27 @@ using UnityEngine;
 public class Sword : MonoBehaviour
 {
     private int stackSword;
-    private int dmgSword;
+    private int dmg;
     public static int swordLevel;
+    public static int cost;
     // Start is called before the first frame update
     void Start()
     {
         stackSword = 3 - (swordLevel % 3);
-        dmgSword = 8 + (swordLevel / 3 * 4);
+        dmg = 8 + (swordLevel / 3 * 4);
     }
 
     public void DamageSword(){
         if (GameController.stack >= stackSword)
         {
             GameController.stack -= stackSword;
-            Enemy.enemyHp -= dmgSword;
-            TurnController.turn = false;
+            if (Enemy.weakness1 == "axe" || Enemy.weakness2 == "axe"){
+                
+            }else{
+                TurnController.turn = false;
+            }
+            Enemy.enemyHp -= dmg;
+            
         }
     }
 }

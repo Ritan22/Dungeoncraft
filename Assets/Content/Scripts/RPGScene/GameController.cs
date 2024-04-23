@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject deathInterface;
     [SerializeField] private GameObject nextLevelCanvas;
     [SerializeField] private GameObject background;
+
+    private bool enemyDeath;
     
     public GameObject[] enemies;
     //--------------------------------------------------------------------------------------------------------------------------------
@@ -37,6 +39,20 @@ public class GameController : MonoBehaviour
         {
             Death();
         }
+        if (GameObject.FindGameObjectWithTag("Enemy") != null){
+        if (Enemy.enemyHp <= 0) {
+            if (background.activeSelf){
+                nextLevelCanvas.SetActive(true);
+                background.SetActive(false);
+                TurnController.turn = true;
+            }if (enemyDeath){
+                nextLevelCanvas.SetActive(false); // disattiva la Canva per passare di livello
+                background.SetActive(true);// riattiva la Canva per la scelta delle azioni in partita
+                enemyDeath = false;
+            }
+        }
+        }
+        
     }
     //--------------------------------------------------------------------------------------------------------------------------------
 
@@ -54,10 +70,7 @@ public class GameController : MonoBehaviour
 
     public void DamageEnemy(){
         // controlla se il nemico ha perso tutti gli hp e attiva e disattiva le giuste Canva per passare al livello successivo
-        if (Enemy.enemyHp <= 0) {
-            nextLevelCanvas.SetActive(true);
-            background.SetActive(false);
-        }
+        
         stack +=1; // aumenta le stack dopo aver sferrato un attacco semplice
         stack = Mathf.Clamp(stack, 0,6); // impedisce al numero di stack di superare le 6 unità
         TurnController.turn = false; // setta il turno a false in modo da passare al turno avversario
@@ -65,9 +78,11 @@ public class GameController : MonoBehaviour
 
     public void NextLevel() {
         dungeonLevel++; // aumento di una unità il livello del dungeon
-        nextLevelCanvas.SetActive(false); // disattiva la Canva per passare di livello
-        background.SetActive(true);// riattiva la Canva per la scelta delle azioni in partita
         stack = 0; // imposta le stack a 0 siccome ogni battaglia è a se
         Instantiate(enemies[Random.Range(0, enemies.Length)]); // riposiziona uno dei nemici presenti nella lista
+        nextLevelCanvas.SetActive(false); // disattiva la Canva per passare di livello
+        background.SetActive(true);// riattiva la Canva per la scelta delle azioni in partita
+        enemyDeath = true;
+        
     }
 }

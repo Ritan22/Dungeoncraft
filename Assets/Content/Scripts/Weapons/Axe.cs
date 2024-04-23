@@ -4,22 +4,31 @@ using UnityEngine;
 
 public class Axe : MonoBehaviour
 {
-    private int stackBow;
-    private int dmgAxe;
+    private int stackAxe;
+    private int dmg;
     public static int axeLevel;
+
+    public static int cost;
     // Start is called before the first frame update
     void Start()
     {
-        stackBow = 3 - (axeLevel % 3);
-        dmgAxe = 8 + (axeLevel / 3 * 4);
+        stackAxe = 3 - (axeLevel % 3);
+        dmg = 8 + (axeLevel / 3 * 4);
     }
 
     public void DamageAxe(){
-        if (GameController.stack >= stackBow)
+        if (GameController.stack >= stackAxe)
         {
-            GameController.stack -= stackBow;
-            Enemy.enemyHp -= dmgAxe;
-            TurnController.turn = false;
+            GameController.stack -= stackAxe;
+            if (Enemy.weakness1 == "axe" || Enemy.weakness2 == "axe"){
+                
+            }else{
+                TurnController.turn = false;
+            }
+            Enemy.enemyHp -= dmg;
+            
         }
     }
+
+
 }
